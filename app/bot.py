@@ -186,6 +186,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 reply_markup=reply_markup
             )
     else:
+        # Check for deep linking arguments (success/cancel)
+        if context.args:
+            if context.args[0] == 'success':
+                await update.message.reply_text(
+                    "✅ **Payment Verification**\n\n"
+                    "We are verifying your payment with Stripe. \n"
+                    "You should receive an **Invite Link** in a separate message shortly.\n\n"
+                    "check your status if you don't receive it.",
+                    parse_mode=ParseMode.MARKDOWN
+                )
+            elif context.args[0] == 'cancel':
+                await update.message.reply_text(
+                    "❌ **Payment Cancelled**\nValues are not saved.",
+                    parse_mode=ParseMode.MARKDOWN
+                )
+
         await update.message.reply_text(
             "👋 Welcome to the Subscription Bot!\nChoose an option below:",
             reply_markup=reply_markup
