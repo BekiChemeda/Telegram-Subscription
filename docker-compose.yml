@@ -1,0 +1,30 @@
+services:
+  bot:
+    build: .
+    command: python app/bot.py
+    env_file: .env
+    depends_on:
+      - mongo
+    restart: always
+
+  web:
+    build: .
+    command: uvicorn app.webhook_server:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
+
+volumes:
+  mongo_data:
