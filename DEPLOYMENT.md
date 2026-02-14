@@ -21,8 +21,8 @@ We have included a `docker-compose.yml` file which creates a full environment wi
    sudo docker-compose up -d --build
    ```
 6. **Webhooks**:
-   - The server will listen on port 8000.
-   - Set your Stripe Webhook URL to `http://<YOUR_VPS_IP>:8000/stripe/webhook`
+   - The server will listen on port 8080 (externally).
+   - Set your Stripe Webhook URL to `http://<YOUR_VPS_IP>:8080/stripe/webhook`
 
 ## Option 2: PaaS (Railway, Render, Heroku) - Easiest
 These platforms handle the servers for you.
